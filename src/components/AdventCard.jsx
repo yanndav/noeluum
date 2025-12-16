@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import VideoModal from "./VideoModal";
 import { useState, useEffect } from "react";
+import whooshSound from "../assets/sounds/wooshOuverture.mp3";
 
 export default function AdventCard({ card, day }) {
   const [openCard, setOpenCard] = useState(null); // currently open card
@@ -11,7 +12,7 @@ export default function AdventCard({ card, day }) {
 
   useEffect(() => {
     if (openCard) {
-      const audio = new Audio("public/sounds/wooshOuverture.mp3");
+      const audio = new Audio(whooshSound);
       audio.play().catch((err) => console.log(err));
     }
   }, [openCard]); // ✅ run only when `open` changes to true
