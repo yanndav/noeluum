@@ -2,9 +2,28 @@ import { motion } from "framer-motion";
 import VideoModal from "./VideoModal";
 import { useState, useEffect } from "react";
 import whooshSound from "../assets/sounds/wooshOuverture.mp3";
+function getDoorSvg(day, side) {
+  const key = `../assets/doors/${day}${side}.svg`;
+  const svg = doorSvgs[key];
+
+  if (!svg) {
+    console.warn("SVG introuvable :", key);
+    return null;
+  }
+
+  return svg;
+}
+const doorSvgs = import.meta.glob("../assets/doors/*.svg", {
+  eager: true,
+  as: "url",
+});
 
 export default function AdventCard({ card, day }) {
   const [openCard, setOpenCard] = useState(null); // currently open card
+
+  const today = new Date();
+  const currentDay = today.getMonth() === 11 ? today.getDate() : 0;
+  const isUnlocked = day <= currentDay;
 
   const handleOpen = () => {
     setOpenCard(true);
@@ -20,20 +39,31 @@ export default function AdventCard({ card, day }) {
   return (
     <>
       {!openCard && (
-        <div className="card-wrapper" onClick={() => handleOpen()}>
+        <div
+          className={`card-wrapper ${!isUnlocked ? "locked" : ""}`}
+          onClick={() => isUnlocked && handleOpen()}
+        >
           <div className="doors">
             <motion.div
               className="door left"
-              whileHover={{ rotateY: -10 }}
+              whileHover={isUnlocked ? { rotateY: -10 } : undefined}
               transition={{ duration: 0.3 }}
-            />
+            >
+              {getDoorSvg(card.title, "g") && (
+                <img src={getDoorSvg(card.title, "g")} alt="" />
+              )}{" "}
+            </motion.div>
             <motion.div
               className="door right"
-              whileHover={{ rotateY: 10 }}
+              whileHover={isUnlocked ? { rotateY: -10 } : undefined}
               transition={{ duration: 0.3 }}
-            />
+            >
+              {" "}
+              {getDoorSvg(card.title, "g") && (
+                <img src={getDoorSvg(card.title, "d")} alt="" />
+              )}{" "}
+            </motion.div>
           </div>
-          <div className="day-label">{day}</div>
         </div>
       )}
 

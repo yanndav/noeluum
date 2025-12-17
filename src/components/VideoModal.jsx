@@ -5,6 +5,21 @@ export default function VideoModal({ video, onClose }) {
   const [openDoor, setOpenDoor] = useState(false);
   setTimeout(() => setOpenDoor(true), 1000);
 
+  function getDoorSvg(day, side) {
+    const key = `../assets/doors/${day}${side}.svg`;
+    const svg = doorSvgs[key];
+
+    if (!svg) {
+      console.warn("SVG introuvable :", key);
+      return null;
+    }
+
+    return svg;
+  }
+  const doorSvgs = import.meta.glob("../assets/doors/*.svg", {
+    eager: true,
+    as: "url",
+  });
   return (
     <AnimatePresence>
       <motion.div
@@ -23,26 +38,31 @@ export default function VideoModal({ video, onClose }) {
           transition={{ duration: 0.4 }}
         >
           <motion.div
-            className="day-label"
-            animate={{ opacity: openDoor ? 0 : 1 }}
-            transition={{ duration: 0.6, ease: "easeInOut" }}
-          >
-            Joyeux noël!
-          </motion.div>
-          <motion.div
             onClick={() => setOpenDoor(true)}
             className="door left"
             whileHover={{ rotateY: -30 }}
             animate={{ rotateY: openDoor ? -90 : 0 }}
             transition={{ duration: 0.6, ease: "easeInOut" }}
-          />
+          >
+            <img
+              className="door-svg left"
+              src={getDoorSvg(video.title, "g")}
+              alt=""
+            />
+          </motion.div>
           <motion.div
             onClick={() => setOpenDoor(true)}
             className="door right"
             whileHover={{ rotateY: 30 }}
             animate={{ rotateY: openDoor ? 90 : 0 }}
             transition={{ duration: 0.6, ease: "easeInOut" }}
-          />
+          >
+            <img
+              className="door-svg right"
+              src={getDoorSvg(video.title, "d")}
+              alt=""
+            />
+          </motion.div>
           <motion.div
             className="day-label-relative"
             animate={{ opacity: openDoor ? 1 : 0 }}

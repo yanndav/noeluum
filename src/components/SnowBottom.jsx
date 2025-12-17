@@ -17,15 +17,15 @@ export default function SnowBottom({ startDelay = 5000 }) {
     if (!start) return;
 
     const interval = setInterval(() => {
-      setHeight((prev) => (prev < 400 ? prev + 1 : prev));
-    }, 200); // growth step
+      setHeight((prev) => (prev < 200 ? prev + 1 : prev));
+    }, 400); // growth step
 
     return () => clearInterval(interval);
   }, [start]);
 
   return (
     <div className="snowbottom-container">
-      <div className="snow-bottom" style={{ height: `${height}px` }} />;
+      <div className="snow-bottom" style={{ height: `${height}px` }} />
     </div>
   );
 }

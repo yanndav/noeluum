@@ -1,8 +1,78 @@
 export const videos = [
-  { day: 15, title: "15", url: "https://www.youtube.com/embed/LIeph7d3WhQ" },
-  { day: 20, title: "20", url: "https://www.youtube.com/embed/f0zrpNc-wM4" },
-  { day: 21, title: "21", url: "https://www.youtube.com/embed/3AD9bWweqbc" },
-  { day: 22, title: "22", url: "https://www.youtube.com/embed/fzRZJKTXptY" },
-  { day: 23, title: "23", url: "https://www.youtube.com/embed/JtaDw-7LsjI" },
-  { day: 24, title: "24", url: "https://www.youtube.com/embed/JtaDw-7LsjI" },
+  {
+    day: 19,
+    type: "video",
+    title: "19",
+    color: "#FFFFFF",
+    url: "https://www.youtube.com/embed/LIeph7d3WhQ",
+  },
+
+  {
+    type: "pipe",
+    title: "19_20",
+    day: 20,
+  },
+  {
+    day: 21,
+    title: "21",
+    type: "video",
+
+    color: "#FFFFFF",
+    url: "https://www.youtube.com/embed/3AD9bWweqbc",
+  },
+  {
+    type: "pipe",
+    title: "20_21",
+    day: 21,
+  },
+  {
+    day: 20,
+    title: "20",
+    type: "video",
+
+    color: "#4B4949",
+    url: "https://www.youtube.com/embed/f0zrpNc-wM4",
+  },
+
+  {
+    type: "pipe",
+    title: "21_22",
+    day: 22,
+  },
+  {
+    day: 22,
+    type: "video",
+
+    title: "22",
+    color: "#FFFFFF",
+    url: "https://www.youtube.com/embed/fzRZJKTXptY",
+  },
+  {
+    type: "pipe",
+
+    title: "23_24",
+    day: 24,
+  },
+
+  {
+    day: 23,
+    type: "video",
+
+    title: "23",
+    color: "#FFFFFF",
+    url: "https://www.youtube.com/embed/JtaDw-7LsjI",
+  },
+  {
+    type: "pipe",
+    title: "22_23",
+    day: 24,
+  },
+  {
+    day: 24,
+    title: "24",
+    type: "video",
+
+    color: "#4B4949",
+    url: "https://www.youtube.com/embed/JtaDw-7LsjI",
+  },
 ];
