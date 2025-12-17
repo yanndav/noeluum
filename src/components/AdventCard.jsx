@@ -3,15 +3,16 @@ import VideoModal from "./VideoModal";
 import { useState, useEffect } from "react";
 import whooshSound from "../assets/sounds/wooshOuverture.mp3";
 function getDoorSvg(day, side) {
-  const key = `../assets/doors/${day}${side}.svg`;
-  const svg = doorSvgs[key];
+  // const key = `../assets/doors/${day}${side}.svg`;
+  // const svg = doorSvgs[key];
 
-  if (!svg) {
-    console.warn("SVG introuvable :", key);
-    return null;
-  }
+  // if (!svg) {
+  //   console.warn("SVG introuvable :", key);
+  //   return null;
+  // }
 
-  return svg;
+  // return svg;
+  return `${import.meta.env.BASE_URL}assets/doors/${day}${side}.svg`;
 }
 const doorSvgs = import.meta.glob("../assets/doors/*.svg", {
   eager: true,

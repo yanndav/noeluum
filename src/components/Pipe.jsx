@@ -6,15 +6,16 @@ const pipesSvgs = import.meta.glob("../assets/pipes/*.svg", {
 });
 
 function getPipesSvg(days) {
-  const key = `../assets/pipes/${days}.svg`;
-  const svg = pipesSvgs[key];
+  // const key = `../assets/pipes/${days}.svg`;
+  // const svg = pipesSvgs[key];
 
-  if (!svg) {
-    console.warn("SVG introuvable :", key);
-    return null;
-  }
+  // if (!svg) {
+  //   console.warn("SVG introuvable :", key);
+  //   return null;
+  // }
 
-  return svg;
+  // return svg;
+  return `${import.meta.env.BASE_URL}assets/pipes/${days}.svg`;
 }
 
 const Pipe = ({ days }) => {
