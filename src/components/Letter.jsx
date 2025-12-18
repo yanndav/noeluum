@@ -38,9 +38,13 @@ function useLettreAudio(soundEnabled) {
 
     const audio = audioRef.current;
 
+    console.log("sound mode", soundEnabled);
     if (soundEnabled) {
+      console.log("sound launch");
       audio.play().catch(() => {});
     } else {
+      console.log("sound pause");
+
       audio.pause();
       audio.currentTime = 0;
     }

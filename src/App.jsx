@@ -35,6 +35,7 @@ export default function App() {
 
   useEffect(() => {
     if (soundEnabled !== null) {
+      console.log(soundEnabled, "sound");
       localStorage.setItem("sound-enabled", soundEnabled);
     }
   }, [soundEnabled]);
