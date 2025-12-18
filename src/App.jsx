@@ -34,7 +34,7 @@ export default function App() {
   }, []);
 
   useEffect(() => {
-    if (soundEnabled) {
+    if (soundEnabled !== null) {
       localStorage.setItem("sound-enabled", soundEnabled);
     }
   }, [soundEnabled]);
@@ -66,10 +66,7 @@ export default function App() {
 
           <LuumFactory />
 
-          <AdventGrid
-            soundEnabled={soundEnabled}
-            setSoundEnabled={setSoundEnabled}
-          />
+          <AdventGrid soundEnabled={soundEnabled} />
           <Snowfall count={50} />
         </>
       )}

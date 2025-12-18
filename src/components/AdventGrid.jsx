@@ -5,7 +5,7 @@ import { videos } from "../data/videos";
 import Pipe from "./Pipe";
 import factory from "../assets/sounds/factory.mp3";
 
-export default function AdventGrid({ soundEnabled, setSoundEnabled }) {
+export default function AdventGrid({ soundEnabled }) {
   const [soundFX, setSoundFX] = useState(true);
   useIntroAudio(soundEnabled, soundFX);
   return (
