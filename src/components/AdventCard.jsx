@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import VideoModal from "./VideoModal";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import whooshSound from "../assets/sounds/wooshOuverture.mp3";
 function getDoorSvg(day, side) {
   return `${import.meta.env.BASE_URL}assets/doors/${day}${side}.svg`;
@@ -8,7 +8,7 @@ function getDoorSvg(day, side) {
 
 export default function AdventCard({ card, day, soundEnabled, setSoundFX }) {
   const [openCard, setOpenCard] = useState(null); // currently open card
-
+  const lockedAudioRef = useRef(null);
   const today = new Date();
   const currentDay = today.getMonth() === 11 ? today.getDate() : 0;
   const isUnlocked = day <= currentDay;
@@ -23,6 +23,20 @@ export default function AdventCard({ card, day, soundEnabled, setSoundFX }) {
     setSoundFX(true);
   };
 
+  const playLockedSound = (day) => {
+    if (!soundEnabled) return;
+
+    if (!lockedAudioRef.current) {
+      lockedAudioRef.current = new Audio();
+    }
+
+    const src = `${import.meta.env.BASE_URL}assets/sounds/stop${day}.mp3`;
+    console.log(src);
+    lockedAudioRef.current.src = src;
+    lockedAudioRef.current.currentTime = 0;
+    lockedAudioRef.current.play().catch(() => {});
+  };
+
   useEffect(() => {
     if (openCard && soundEnabled) {
       const audio = new Audio(whooshSound);
@@ -34,7 +48,9 @@ export default function AdventCard({ card, day, soundEnabled, setSoundFX }) {
       {!openCard && (
         <div
           className={`card-wrapper ${!isUnlocked ? "locked" : ""}`}
-          onClick={() => isUnlocked && handleOpen()}
+          onClick={() =>
+            isUnlocked ? handleOpen() : playLockedSound(card.title)
+          }
         >
           <div className="doors">
             <motion.div

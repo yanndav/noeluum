@@ -20,7 +20,7 @@ export default function AdventGrid({ soundEnabled }) {
             setSoundFX={setSoundFX}
           />
         ) : (
-          <Pipe key={card.days} days={card} />
+          <Pipe key={card.title} days={card} />
         )
       )}
     </div>

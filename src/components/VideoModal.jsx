@@ -78,7 +78,6 @@ export default function VideoModal({ video, onClose, soundEnabled }) {
 }
 
 const getSound = (day) => {
-  console.log(`${import.meta.env.BASE_URL}assets/sounds/${day}.mp3`);
   return `${import.meta.env.BASE_URL}assets/sounds/${day}.mp3`;
 };
 

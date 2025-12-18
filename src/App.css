@@ -344,7 +344,6 @@ h1 {
 }
 
 .card-wrapper.locked {
-  pointer-events: none;
   cursor: not-allowed;
   width: 100%;
 }

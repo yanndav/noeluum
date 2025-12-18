@@ -29,8 +29,10 @@ export default function App() {
 
   useEffect(() => {
     const stored = localStorage.getItem("sound-enabled");
-    setSoundEnabled(stored === "true");
-    setWelcome(stored === "true");
+    if (stored) {
+      setWelcome(true);
+      setSoundEnabled(stored === "true");
+    }
   }, []);
 
   useEffect(() => {
