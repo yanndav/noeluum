@@ -5,4 +5,7 @@ import svgr from "vite-plugin-svgr";
 export default defineConfig({
   base: "/noeluum/",
   plugins: [react(), svgr()],
+  build: {
+    chunkSizeWarningLimit: 1000, // en KB
+  },
 });
