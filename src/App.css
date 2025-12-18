@@ -60,6 +60,111 @@ h1 {
   }
 }
 
+.sound-intro {
+  height: 100vh;
+  width: 100%;
+  color: white;
+  font-family: "Mountains of Christmas", cursive;
+  font-size: clamp(2rem, 6vw, 4rem); /* responsive */
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+  padding: 2rem;
+}
+
+.sound-intro h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.sound-intro p {
+  font-size: 1.2rem;
+  max-width: 480px;
+  opacity: 0.9;
+}
+
+.sound-actions {
+  margin-top: 2.5rem;
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.sound-actions button {
+  padding: 0.9rem 1.8rem;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+  background: white;
+  color: #1b2a4e;
+  transition: transform 0.2s ease;
+}
+
+.sound-actions button:hover {
+  transform: scale(1.08);
+}
+
+.sound-toggle {
+  display: flex;
+  position: fixed;
+  top: 1.2rem;
+  right: 1.2rem;
+  z-index: 9999;
+
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: none;
+
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(8px);
+
+  color: white;
+  font-size: 1.3rem;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+}
+
+.sound-toggle:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.revenir-debut {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(8px);
+  padding: 4px 8px;
+
+  color: white;
+  font-size: 0.8rem;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  text-align: left;
+  cursor: pointer;
+  position: fixed;
+  top: 1.2rem;
+  left: 1.2rem;
+  border-radius: 8px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+  transition: transform 0.1s ease-in;
+}
+
+.revenir-debut:hover {
+  transform: scale(1.08);
+}
+
 .hello-wrapper {
   display: flex;
   flex-direction: row;
@@ -96,6 +201,22 @@ h1 {
   z-index: 1;
   border-radius: 8px;
 }
+.top-mail {
+  display: flex;
+  flex-direction: row;
+  background-color: rgb(215, 215, 215);
+  border-radius: 8px 8px 0px 0px;
+  padding: 10px;
+  margin: -10px -10px 0px -10px;
+}
+.logo-top {
+  height: 30px;
+  align-self: left;
+  left: 0;
+  align-items: left;
+  width: min-content;
+}
+
 .mail-heads {
   padding: 10px 3px;
   border-bottom: 1px solid rgb(67, 67, 67); /* 1px black line below */
@@ -117,11 +238,43 @@ h1 {
   transform: scale(1.05); /* slight zoom effect */
 }
 
+.button-svg {
+  margin-top: 80px;
+  max-width: 500px;
+  width: 100%;
+  height: auto;
+}
+
+#BOUTTON {
+  cursor: pointer;
+  transform-origin: center;
+  transition: transform 0.25s ease;
+}
+
+#BOUTTON:hover {
+  transform: scale(1.12);
+  filter: drop-shadow(0 0 12px rgba(255, 215, 120, 0.9));
+}
+
+#BOUTTON:active {
+  transform: scale(0.95);
+}
 .grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(100px, 1fr));
   gap: 1rem;
   width: 100%;
+}
+.luumfactory {
+  max-width: 800px;
+  width: 100%;
+  z-index: 1;
+}
+
+.luumfactory svg {
+  height: auto;
+  width: 100%;
+  object-fit: contain;
 }
 
 .card {

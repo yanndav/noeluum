@@ -1,18 +1,52 @@
-import { useState } from "react";
+import { useState, useEffect, useRef, use } from "react";
 import AdventCard from "./AdventCard";
 import VideoModal from "./VideoModal";
 import { videos } from "../data/videos";
 import Pipe from "./Pipe";
-export default function AdventGrid() {
+import factory from "../assets/sounds/factory.mp3";
+
+export default function AdventGrid({ soundEnabled, setSoundEnabled }) {
+  const [soundFX, setSoundFX] = useState(true);
+  useIntroAudio(soundEnabled, soundFX);
   return (
     <div className="grid">
       {videos.map((card) =>
         card.type === "video" ? (
-          <AdventCard key={card.id} card={card} day={card.day} />
+          <AdventCard
+            key={card.day}
+            card={card}
+            day={card.day}
+            soundEnabled={soundEnabled}
+            setSoundFX={setSoundFX}
+          />
         ) : (
-          <Pipe key={card.id} days={card} />
+          <Pipe key={card.days} days={card} />
         )
       )}
     </div>
   );
+}
+
+function useIntroAudio(soundEnabled, soundFX) {
+  const audioRef = useRef(null);
+
+  useEffect(() => {
+    if (!audioRef.current) {
+      audioRef.current = new Audio(factory);
+    }
+
+    const audio = audioRef.current;
+
+    if (soundEnabled && soundFX) {
+      audio.play().catch(() => {});
+    } else {
+      audio.pause();
+      audio.currentTime = 0;
+    }
+
+    return () => {
+      audio.pause();
+      audio.currentTime = 0;
+    };
+  }, [soundEnabled, soundFX]);
 }

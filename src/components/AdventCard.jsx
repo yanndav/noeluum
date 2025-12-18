@@ -3,23 +3,10 @@ import VideoModal from "./VideoModal";
 import { useState, useEffect } from "react";
 import whooshSound from "../assets/sounds/wooshOuverture.mp3";
 function getDoorSvg(day, side) {
-  // const key = `../assets/doors/${day}${side}.svg`;
-  // const svg = doorSvgs[key];
-
-  // if (!svg) {
-  //   console.warn("SVG introuvable :", key);
-  //   return null;
-  // }
-
-  // return svg;
   return `${import.meta.env.BASE_URL}assets/doors/${day}${side}.svg`;
 }
-const doorSvgs = import.meta.glob("../assets/doors/*.svg", {
-  eager: true,
-  as: "url",
-});
 
-export default function AdventCard({ card, day }) {
+export default function AdventCard({ card, day, soundEnabled, setSoundFX }) {
   const [openCard, setOpenCard] = useState(null); // currently open card
 
   const today = new Date();
@@ -28,15 +15,20 @@ export default function AdventCard({ card, day }) {
 
   const handleOpen = () => {
     setOpenCard(true);
+    setSoundFX(false);
+  };
+
+  const handleClose = () => {
+    setOpenCard(null);
+    setSoundFX(true);
   };
 
   useEffect(() => {
-    if (openCard) {
+    if (openCard && soundEnabled) {
       const audio = new Audio(whooshSound);
       audio.play().catch((err) => console.log(err));
     }
-  }, [openCard]); // ✅ run only when `open` changes to true
-
+  }, [openCard]);
   return (
     <>
       {!openCard && (
@@ -69,7 +61,11 @@ export default function AdventCard({ card, day }) {
       )}
 
       {openCard && (
-        <VideoModal video={card} onClose={() => setOpenCard(null)} />
+        <VideoModal
+          video={card}
+          onClose={() => handleClose()}
+          soundEnabled={soundEnabled}
+        />
       )}
     </>
   );

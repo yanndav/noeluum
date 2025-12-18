@@ -1,6 +1,6 @@
 export const videos = [
   {
-    day: 19,
+    day: 18,
     type: "video",
     title: "19",
     color: "#FFFFFF",
@@ -13,7 +13,7 @@ export const videos = [
     day: 20,
   },
   {
-    day: 21,
+    day: 18,
     title: "21",
     type: "video",
 
@@ -26,7 +26,7 @@ export const videos = [
     day: 21,
   },
   {
-    day: 20,
+    day: 18,
     title: "20",
     type: "video",
 
@@ -40,7 +40,7 @@ export const videos = [
     day: 22,
   },
   {
-    day: 22,
+    day: 18,
     type: "video",
 
     title: "22",
@@ -55,7 +55,7 @@ export const videos = [
   },
 
   {
-    day: 23,
+    day: 18,
     type: "video",
 
     title: "23",
@@ -68,7 +68,7 @@ export const videos = [
     day: 24,
   },
   {
-    day: 24,
+    day: 18,
     title: "24",
     type: "video",
 

@@ -6,36 +6,70 @@ import Letter from "./components/Letter";
 import { useEffect, useState } from "react";
 import SparkleTransition from "./components/SparkleTransition";
 import cestParti from "./assets/sounds/cestParti.mp3";
-
+import LuumFactory from "./components/LuumFactory";
+import AcceptSound from "./components/AcceptSound";
+import SoundToggleButton from "./components/SoundToggleButton";
+import RevenirDebut from "./components/RevenirDebut";
 export default function App() {
+  const [welcome, setWelcome] = useState(false);
   const [start, setStart] = useState(false);
+  const [soundEnabled, setSoundEnabled] = useState(null);
 
   const handleStart = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
     setStart(true);
+    setWelcome(false);
   };
   useEffect(() => {
-    if (start) {
+    if (start && soundEnabled) {
       const audio = new Audio(cestParti);
       audio.play().catch((err) => console.log(err));
     }
   }, [start]); // ✅ run only when `open` changes to true
 
+  useEffect(() => {
+    const stored = localStorage.getItem("sound-enabled");
+    setSoundEnabled(stored === "true");
+    setWelcome(stored === "true");
+  }, []);
+
+  useEffect(() => {
+    if (soundEnabled) {
+      localStorage.setItem("sound-enabled", soundEnabled);
+    }
+  }, [soundEnabled]);
+
+  const onRestart = () => {
+    setWelcome(true);
+    setStart(false);
+  };
   return (
     <main>
-      {!start && <Letter handleStart={handleStart} />}
-
+      <SoundToggleButton
+        setSoundEnabled={setSoundEnabled}
+        soundEnabled={soundEnabled}
+      />
+      {!welcome && (
+        <AcceptSound onChoice={setSoundEnabled} setWelcome={setWelcome} />
+      )}
+      {welcome && !start && (
+        <Letter handleStart={handleStart} soundEnabled={soundEnabled} />
+      )}
       {start && (
         <>
-          <SparkleTransition />
+          <SparkleTransition soundEnabled={soundEnabled} />
           <SnowBottom />
-          <div class="title-wrapper">
-            <h1 class="title">Le Caluümdrier de l'Avent</h1>
-            <div class="star"></div>
-            <div class="snowflake">&#10052;</div>
+          <RevenirDebut onRestart={onRestart} />
+          <div className="title-wrapper">
+            <h1 className="title">Le Caluümdrier de l'Avent</h1>
           </div>
 
-          <AdventGrid />
+          <LuumFactory />
+
+          <AdventGrid
+            soundEnabled={soundEnabled}
+            setSoundEnabled={setSoundEnabled}
+          />
           <Snowfall count={50} />
         </>
       )}

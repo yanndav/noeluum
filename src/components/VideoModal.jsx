@@ -1,25 +1,15 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 
-export default function VideoModal({ video, onClose }) {
+export default function VideoModal({ video, onClose, soundEnabled }) {
   const [openDoor, setOpenDoor] = useState(false);
   setTimeout(() => setOpenDoor(true), 1000);
-
   function getDoorSvg(day, side) {
-    const key = `../assets/doors/${day}${side}.svg`;
-    const svg = doorSvgs[key];
-
-    if (!svg) {
-      console.warn("SVG introuvable :", key);
-      return null;
-    }
-
-    return svg;
+    return `${import.meta.env.BASE_URL}assets/doors/${day}${side}.svg`;
   }
-  const doorSvgs = import.meta.glob("../assets/doors/*.svg", {
-    eager: true,
-    as: "url",
-  });
+
+  useIntroAudio(soundEnabled, video.title);
+
   return (
     <AnimatePresence>
       <motion.div
@@ -63,13 +53,13 @@ export default function VideoModal({ video, onClose }) {
               alt=""
             />
           </motion.div>
-          <motion.div
+          {/* <motion.div
             className="day-label-relative"
             animate={{ opacity: openDoor ? 1 : 0 }}
             transition={{ duration: 0.6, ease: "easeInOut" }}
           >
             {video.day}
-          </motion.div>
+          </motion.div> */}
           <div className="video-wrapper">
             <iframe
               width="100%"
@@ -85,4 +75,39 @@ export default function VideoModal({ video, onClose }) {
       </motion.div>
     </AnimatePresence>
   );
+}
+
+const getSound = (day) => {
+  console.log(`${import.meta.env.BASE_URL}assets/sounds/${day}.mp3`);
+  return `${import.meta.env.BASE_URL}assets/sounds/${day}.mp3`;
+};
+
+function useIntroAudio(soundEnabled, day) {
+  const audioRef = useRef(null);
+
+  useEffect(() => {
+    if (!audioRef.current) {
+      audioRef.current = new Audio(getSound(day));
+    } else if (audioRef.current.src !== getSound(day)) {
+      audioRef.current.src = getSound(day);
+    }
+
+    const audio = audioRef.current;
+    let timeout;
+
+    if (soundEnabled) {
+      timeout = setTimeout(() => {
+        audio.play().catch((e) => console.log("audio error", e));
+      }, 1000); // 2 second delay
+    } else {
+      audio.pause();
+      audio.currentTime = 0;
+    }
+
+    return () => {
+      clearTimeout(timeout);
+      audio.pause();
+      audio.currentTime = 0;
+    };
+  }, [soundEnabled, day]);
 }
