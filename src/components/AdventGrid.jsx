@@ -9,20 +9,22 @@ export default function AdventGrid({ soundEnabled }) {
   const [soundFX, setSoundFX] = useState(true);
   useIntroAudio(soundEnabled, soundFX);
   return (
-    <div className="grid">
-      {videos.map((card) =>
-        card.type === "video" ? (
-          <AdventCard
-            key={card.day}
-            card={card}
-            day={card.day}
-            soundEnabled={soundEnabled}
-            setSoundFX={setSoundFX}
-          />
-        ) : (
-          <Pipe key={card.title} days={card} />
-        )
-      )}
+    <div className="grid-wrapper">
+      <div className="grid">
+        {videos.map((card) =>
+          card.type === "video" ? (
+            <AdventCard
+              key={card.day}
+              card={card}
+              day={card.day}
+              soundEnabled={soundEnabled}
+              setSoundFX={setSoundFX}
+            />
+          ) : (
+            <Pipe key={card.title} days={card} />
+          )
+        )}
+      </div>
     </div>
   );
 }

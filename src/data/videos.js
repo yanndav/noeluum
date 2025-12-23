@@ -65,14 +65,16 @@ export const videos = [
   {
     type: "pipe",
     title: "22_23",
-    day: 24,
+    day: 23,
   },
   {
     day: 24,
     title: "24",
+    description: `Et pour conclure, voici une version semi-brute de la captation complète. Un peu comme le champagne de ce soir.
+       \nJe vous l'envoie pour le plaisir de la revoir en intégralité, mais les problèmes techniques rendront impossible une belle vidéo comme je l'aurais souhaité.
+       \nJe vous souhaite un Joyeux Noël mes Luümtins ! `,
     type: "video",
-
     color: "#4B4949",
-    url: "https://www.youtube.com/embed/JtaDw-7LsjI",
+    url: "https://www.youtube.com/embed/2o_G2Ua_eV4",
   },
 ];

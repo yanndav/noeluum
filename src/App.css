@@ -235,6 +235,17 @@ h1 {
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
+.text-final {
+  font-family: "Mountains of Christmas", cursive;
+  font-size: 2em;
+  background-color: white;
+  border-radius: 20px;
+  padding: 20px;
+  margin-bottom: 20px;
+  color: black;
+  white-space: "pre-line";
+}
+
 .action:hover {
   background-color: #a92020;
 
@@ -267,6 +278,7 @@ h1 {
   grid-template-columns: repeat(3, minmax(100px, 1fr));
   gap: 1rem;
   width: 100%;
+  position: relative;
 }
 .luumfactory {
   max-width: 800px;
@@ -462,9 +474,10 @@ h1 {
 
 .modal-content {
   width: calc(100% - 40px);
+  max-height: 80%;
   /* aspect-ratio: 16/9; */
   border-radius: 8px;
-  overflow: hidden;
+  overflow: auto;
   background-color: #991b1b;
   max-width: 900px;
   gap: 20px;
@@ -530,7 +543,19 @@ h1 {
   z-index: 0;
   transition: height 0.2s linear;
 }
-
+.grid-wrapper {
+  position: relative;
+}
+.snow-grid {
+  position: absolute;
+  inset: 0;
+  width: 100vw;
+  margin-left: 0;
+  background: white;
+  border-top-left-radius: 50% 50px;
+  border-top-right-radius: 50% 50px;
+  z-index: 0;
+}
 .corner-snow {
   position: fixed; /* stays at viewport corners */
   bottom: 0;

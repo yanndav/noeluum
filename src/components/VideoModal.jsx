@@ -53,13 +53,15 @@ export default function VideoModal({ video, onClose, soundEnabled }) {
               alt=""
             />
           </motion.div>
-          {/* <motion.div
-            className="day-label-relative"
-            animate={{ opacity: openDoor ? 1 : 0 }}
-            transition={{ duration: 0.6, ease: "easeInOut" }}
-          >
-            {video.day}
-          </motion.div> */}
+          <div className={`${video.description ? "text-final" : ""}`}>
+            {video.description &&
+              video.description.split("\n").map((line, index) => (
+                <div key={index}>
+                  {line}
+                  <br />
+                </div>
+              ))}
+          </div>
           <div className="video-wrapper">
             <iframe
               width="100%"
