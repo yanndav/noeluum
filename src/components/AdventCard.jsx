@@ -11,7 +11,7 @@ export default function AdventCard({ card, day, soundEnabled, setSoundFX }) {
   const lockedAudioRef = useRef(null);
   const today = new Date();
   const currentDay = today.getMonth() === 11 ? today.getDate() : 0;
-  const isUnlocked = day <= currentDay;
+  const isUnlocked = true;
 
   const handleOpen = () => {
     setOpenCard(true);
